@@ -1,0 +1,15 @@
+//  Functions that execute during the req res cycle when you make a response
+
+const errorHandler = (err, req, res, next) => {
+  const statusCode = res.statusCode ? res.statusCode : 500;
+  res.status(statusCode);
+
+  res.json({
+    message: err.message,
+    stack: process.env.NODE_ENV === 'production' ? nukk : err.stack,
+  });
+};
+
+module.exports = {
+  errorHandler,
+};
